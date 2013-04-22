@@ -322,6 +322,6 @@
             return str;
         },
 
-        CLASS_NAME: 'KoalaGIS.OpenLayers.Baidu.WmtsLayer'
+        CLASS_NAME: 'OpenLayers.BaiduLayer'
 
     });
