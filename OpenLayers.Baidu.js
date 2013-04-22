@@ -117,12 +117,7 @@
 
 
         getContainingTileCoords: function (point, res) {
-            //        return new OpenLayers.Pixel(
-            //           Math.max(Math.floor((point.x - this.tileOrigin.lon) / (this.tileSize.w * res)), 0),
-            //           Math.max(Math.floor((this.tileOrigin.lat - point.y) / (this.tileSize.h * res)), 0)
-            //        );
-
-            return new OpenLayers.Pixel(
+               return new OpenLayers.Pixel(
            Math.floor((point.x - this.tileOrigin.lon) / (this.tileSize.w * res)),
            Math.floor((point.y - this.tileOrigin.lat) / (this.tileSize.h * res))
         );
@@ -178,15 +173,10 @@
             var end = this.getLowerRightTileCoord(res);
 
             var numTileCols = (end.x - start.x) + 1;
-
-            //var numTileRows = (end.y - start.y) + 1;
-
             var numTileRows = (start.y - end.y) + 1;
 
             var minX = this.tileOrigin.lon + (start.x * this.tileSize.w * res);
             var maxX = minX + (numTileCols * this.tileSize.w * res);
-
-            //var maxY = this.tileOrigin.lat - (start.y * this.tileSize.h * res);
             var maxY = this.tileOrigin.lat + (start.y * this.tileSize.h * res);
             var minY = maxY - (numTileRows * this.tileSize.h * res);
             return new OpenLayers.Bounds(minX, minY, maxX, maxY);
@@ -213,50 +203,20 @@
 
         getURL: function (bounds) {
             //debugger;
-
             var z = this.map.getZoom();
-
-
-            var res = this.getResolution();
-
-            //  z = 18 - z;
-
-            // var res = Math.pow(2, z - 18);
+           var res = this.getResolution();
 
             // tile center
             var originTileX = (this.tileOrigin.lon + (res * this.tileSize.w / 2));
-            //        var originTileY = (this.tileOrigin.lat - (res * this.tileSize.h / 2));
-
             var originTileY = (this.tileOrigin.lat + (res * this.tileSize.h / 2));
 
             originTileX = 0;
             originTileY = 0;
 
             var center = bounds.getCenterLonLat();
-            //center.lat = 4825923.77;
-            //center.lon = 12958175;
             var point = { x: center.lon, y: center.lat };
-
-
-            //        var x = (Math.round(Math.abs((center.lon - originTileX) / (res * this.tileSize.w))));
-            //        //var y = (Math.round(Math.abs((originTileY - center.lat) / (res * this.tileSize.h))));
-            //        var y = (Math.round(Math.abs((center.lat - originTileY) / (res * this.tileSize.h))));
-
             var x = (Math.round((center.lon - originTileX) / (res * this.tileSize.w)));
-            //var y = (Math.round(Math.abs((originTileY - center.lat) / (res * this.tileSize.h))));
             var y = (Math.round((center.lat - originTileY) / (res * this.tileSize.h)));
-
-            // x = Math.round(center.lon * 1 / this.tileSize.w);
-            // y = Math.round(center.lat * 1 / this.tileSize.h);
-
-            //var x = Math.floor(Math.abs((center.lon) * res / this.tileSize.w));
-            //var y = (Math.round(Math.abs((originTileY - center.lat) / (res * this.tileSize.h))));
-            //var y = Math.floor(Math.abs((center.lat ) * res / this.tileSize.h));
-
-            //x = Math.round(Math.abs(x) / 256 );
-            // y = Math.round(Math.abs(y) / 256 );
-
-
 
             // this prevents us from getting pink tiles (non-existant tiles)
             if (this.lods) {
@@ -269,14 +229,10 @@
             else {
                 var start = this.getUpperLeftTileCoord(res);
                 var end = this.getLowerRightTileCoord(res);
-                //            if ((x < start.x || x >= end.x)
-                //                || (y < start.y || y >= end.y)) {
-                //                return null;
-                //            }
-
+          
                 if ((x < start.x || x >= end.x)
                 || (y >= start.y || y < end.y)) {
-                    //return null;
+        
                 }
             }
 
