@@ -5,7 +5,7 @@
 
         url: null,
 
-        tileOrigin: new OpenLayers.LonLat(-20037508.34, 20037508.34),
+        tileOrigin: new OpenLayers.LonLat(-33554432, 33554432),
 
         tileSize: new OpenLayers.Size(256, 256),
 
